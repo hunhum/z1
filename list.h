@@ -13,7 +13,7 @@ public:
 	public:
 		LNode *current;
 		Iterator();
-		Iterator(List<T>::LNode *);
+		Iterator(typename List<T>::LNode *);
 		void operator++();
 		int operator!=(const Iterator&) const;
 		int operator==(const Iterator&) const;
@@ -21,8 +21,8 @@ public:
 	};
 	List();
 	~List();
-	List(const List<T>&);
-	List<T>& operator=(const List<T>&);
+	List(const typename List<T>&);
+	List<T>& operator=(const typename List<T>&);
 	void insert_b(T&& val);
 	void insert_a(T&& val);
 	void insert_b(const T& val);
@@ -49,17 +49,17 @@ List<T>::~List(){
 	clear();
 }
 template<typename T>
-List<T>::List(const List<T>& q){
+List<T>::List(const typename List<T>& q){
 	init();
-	for(List<T>::Iterator i=q.begin(); i!=q.end(); ++i){
+	for(typename List<T>::Iterator i=q.begin(); i!=q.end(); ++i){
 		insert_a(*i);
 	}
 }
 template<typename T>
-List<T>& List<T>::operator=(const List<T>& q){
+List<T>& List<T>::operator=(const typename List<T>& q){
 	if(&q != this){
 		clear();
-		for(List<T>::Iterator i=q.begin(); i!=q.end(); ++i){
+		for(typename List<T>::Iterator i=q.begin(); i!=q.end(); ++i){
 			insert_a(*i);
 		}
 	}
@@ -70,7 +70,7 @@ List<T>::Iterator::Iterator(){
 	this->current=nullptr;
 }
 template<typename T>
-List<T>::Iterator::Iterator(List<T>::LNode *q){
+List<T>::Iterator::Iterator(typename List<T>::LNode *q){
 	this->current=q;
 }
 template<typename T>
@@ -78,12 +78,12 @@ void List<T>::Iterator::operator++(){
 	this->current = this->current->next;
 }
 template<typename T>
-int List<T>::Iterator::operator!=(const List<T>::Iterator &q)const{
+int List<T>::Iterator::operator!=(const typename List<T>::Iterator &q)const{
 	if(this->current != q.current){return 1;}
 	return 0;
 }
 template<typename T>
-int List<T>::Iterator::operator==(const List<T>::Iterator &q)const{
+int List<T>::Iterator::operator==(const typename List<T>::Iterator &q)const{
 	if(this->current == q.current){return 1;}
 	return 0;
 }

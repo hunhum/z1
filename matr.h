@@ -10,7 +10,7 @@ private:
 	};
 	class CellX{
 	private:
-		List<Matrix<T>::CellY> *str;
+		typename List<Matrix<T>::CellY> *str;
 		int i;
 	public:
 		CellX();
@@ -19,7 +19,7 @@ private:
 		CellX(const CellX&);
 		CellX& operator=(CellX&&);
 		CellX& operator=(const CellX&);
-		List<Matrix<T>::CellY>* gstr() const;
+		typename List<Matrix<T>::CellY>* gstr() const;
 		int geti() const;
 		void set(int);
 		void nstr();
@@ -27,10 +27,10 @@ private:
 	List<CellX> *ptr;
 public:
 	Matrix();
-	Matrix(const Matrix<T>&);
-	Matrix(Matrix<T>&&);
-	Matrix<T>& operator=(const Matrix<T>&);
-	Matrix<T>& operator=(Matrix<T>&&);
+	Matrix(const typename Matrix<T>&);
+	Matrix(typename Matrix<T>&&);
+	typename Matrix<T>& operator=(const typename Matrix<T>&);
+	typename Matrix<T>& operator=(typename Matrix<T>&&);
 	~Matrix();
 	void init();
 	void clear();
@@ -41,9 +41,9 @@ public:
 	void replace(int,int);
 	void lcomb(int,int,T);
 	T ssum(int,int,int);
-	Matrix<T> getPM(int,int,int,int);
-	Matrix<T> getPM(const std::set<int> &,const std::set<int> &);
-	List<CellX>* gptr() const;
+	typename Matrix<T> getPM(int,int,int,int);
+	typename Matrix<T> getPM(const std::set<int> &,const std::set<int> &);
+	typename List<CellX>* gptr() const;
 	void nptr();
 };
 
@@ -52,7 +52,7 @@ Matrix<T>::Matrix(){
 	init();
 }
 template<typename T>
-Matrix<T>::Matrix(const Matrix<T> &q){
+Matrix<T>::Matrix(const typename Matrix<T> &q){
 	init();
 	this->ptr = new List<CellX>(*(q.gptr()));	
 }
@@ -62,14 +62,14 @@ Matrix<T>::Matrix(Matrix<T>&& q){
 	q.nptr();
 }
 template<typename T>
-Matrix<T>& Matrix<T>::operator=(const Matrix<T> &q){
+typename Matrix<T>& Matrix<T>::operator=(const typename Matrix<T> &q){
 	if(this != &q){
 		*(this->ptr)=*(q.gptr());
 	}
 	return *this;
 }
 template<typename T>
-Matrix<T>& Matrix<T>::operator=(Matrix<T> &&q){
+typename Matrix<T>& Matrix<T>::operator=(typename Matrix<T> &&q){
 	if(this != &q){
 		clear();
 		this->ptr=q.gptr();
@@ -99,18 +99,18 @@ Matrix<T>::CellX::~CellX(){
 	delete this->str;
 }
 template<typename T>
-Matrix<T>::CellX::CellX(const Matrix<T>::CellX &q){
+Matrix<T>::CellX::CellX(const typename Matrix<T>::CellX &q){
 	this->i = q.geti();
 	this->str = new List<CellY>(*(q.gstr()));
 }
 template<typename T>
-Matrix<T>::CellX::CellX(Matrix<T>::CellX &&q){
+Matrix<T>::CellX::CellX(typename Matrix<T>::CellX &&q){
 	this->i=q.geti();
 	this->str=q.gstr();
 	q.nstr();
 }
 template<typename T>
-typename Matrix<T>::CellX& Matrix<T>::CellX::operator=(Matrix<T>::CellX &&q){
+typename Matrix<T>::CellX& Matrix<T>::CellX::operator=(typename Matrix<T>::CellX &&q){
 	if(this!=&q){
 		this->i=q.geti();
 		delete this->str;
@@ -120,7 +120,7 @@ typename Matrix<T>::CellX& Matrix<T>::CellX::operator=(Matrix<T>::CellX &&q){
 	return *this;
 }
 template<typename T>
-typename Matrix<T>::CellX& Matrix<T>::CellX::operator=(const Matrix<T>::CellX &q){
+typename Matrix<T>::CellX& Matrix<T>::CellX::operator=(const typename Matrix<T>::CellX &q){
 	if(this!=&q){
 		this->i=q.geti();
 		*(this->str)=*(q.gstr());
@@ -242,7 +242,7 @@ template<typename T>
 T Matrix<T>::ssum(int i, int j1, int j2){
 	if(ptr->is_empty()){return T{};}
 	T sum{};
-	List<CellY> *str;
+	typename List<CellY> *str;
 	for(typename List<CellX>::Iterator it=ptr->begin();it!=ptr->end();++it){
 		if((*it).geti()==i){
 			str=(*it).gstr();
@@ -258,7 +258,7 @@ T Matrix<T>::ssum(int i, int j1, int j2){
 template<typename T>
 void Matrix<T>::lcomb(int k, int l, T a){
 	if(ptr->is_empty()){return;}
-	List<CellY> *str;
+	typename List<CellY> *str;
 	CellX tmp;
 	for(typename List<CellX>::Iterator it=ptr->begin();it!=ptr->end();++it){
 		if((*it).geti()==l){
@@ -274,9 +274,9 @@ void Matrix<T>::lcomb(int k, int l, T a){
 template<typename T>
 Matrix<T> Matrix<T>::getPM(int i0, int i1, int j0, int j1){
 	if(ptr->is_empty()){throw -2;}
-	List<CellY> *str;
+	typename List<CellY> *str;
 	int i,j;
-	Matrix<T> m;
+	typename Matrix<T> m;
 	for(typename List<CellX>::Iterator it=ptr->begin();it!=ptr->end();++it){
 		i = (*it).geti();
 		if(i>=i0 && i <= i1){
@@ -294,10 +294,10 @@ Matrix<T> Matrix<T>::getPM(int i0, int i1, int j0, int j1){
 template<typename T>
 Matrix<T> Matrix<T>::getPM(const std::set<int> &ii,const std::set<int> &jj){
 	if(ptr->is_empty()){throw -2;}	
-	List<CellY> *str;
+	typename List<CellY> *str;
 	int i,j;
 	int i0=0,j0=0;
-	Matrix<T> m;
+	typename Matrix<T> m;
 	for(typename List<CellX>::Iterator it = ptr->begin(); it!=ptr->end(); ++it){
 		i = (*it).geti();
 		i0 = 0;
