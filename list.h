@@ -22,7 +22,7 @@ public:
 	List();
 	~List();
 	List(const typename List<T>&);
-	List<T>& operator=(const typename List<T>&);
+	typename List<T>& operator=(const typename List<T>&);
 	void insert_b(T&& val);
 	void insert_a(T&& val);
 	void insert_b(const T& val);
@@ -56,7 +56,7 @@ List<T>::List(const typename List<T>& q){
 	}
 }
 template<typename T>
-List<T>& List<T>::operator=(const typename List<T>& q){
+typename List<T>& List<T>::operator=(const typename List<T>& q){
 	if(&q != this){
 		clear();
 		for(typename List<T>::Iterator i=q.begin(); i!=q.end(); ++i){
