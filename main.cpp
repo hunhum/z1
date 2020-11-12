@@ -54,12 +54,12 @@ void printmatr(const Matrix<Num> &m, int k0){
 
 }
 int main(){
-	ATestStatus s = Autotest(ALL);
-	if(s==SUCCESS){cout << "Autotest passed!\n";}
-	if(s==RP_FAIL){cout << "Autotest: replace test error!!!\n";}
-	if(s==LC_FAIL){cout << "Autotest: linear combination test error!!!\n";}
-	if(s==SUM_FAIL){cout << "Autorest: sum test error!!!\n";}
-	if(s==SM_FAIL){cout << "Autotest: submatrix test fail!!!\n";}
+	ATestStatus s = Autotest(ATest::ALL);
+	if(s==ATestStatus::SUCCESS){cout << "Autotest passed!\n";}
+	if(s==ATestStatus::RP_FAIL){cout << "Autotest: replace test error!!!\n";}
+	if(s==ATestStatus::LC_FAIL){cout << "Autotest: linear combination test error!!!\n";}
+	if(s==ATestStatus::SUM_FAIL){cout << "Autorest: sum test error!!!\n";}
+	if(s==ATestStatus::SM_FAIL){cout << "Autotest: submatrix test fail!!!\n";}
 	Matrix<Num>& m = *(new Matrix<Num>);
 	cout << "\n Matrix: \n";
 	for(int i = 0; i < 10; i++){

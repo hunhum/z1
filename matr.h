@@ -6,7 +6,7 @@ class Matrix{
 private:
 	struct CellY{
 		T value;
-		int j;
+		int j = 0;
 	};
 	class CellX{
 	private:
@@ -92,6 +92,7 @@ List<typename Matrix<T>::CellX>* Matrix<T>::gptr() const{
 template<typename T>
 Matrix<T>::CellX::CellX(){
 	this->str = new List<CellY>;
+	i = 0;
 }
 template<typename T>
 Matrix<T>::CellX::~CellX(){
@@ -259,7 +260,6 @@ void Matrix<T>::lcomb(int k, int l, T a){
 	if(ptr->is_empty()){return;}
 	List<CellY> *str;
 	CellX tmp;
-	int j;
 	for(typename List<CellX>::Iterator it=ptr->begin();it!=ptr->end();++it){
 		if((*it).geti()==l){
 			tmp=(*it);

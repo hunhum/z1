@@ -5,7 +5,7 @@ class List{
 private:
 	struct LNode{
 		T value;
-		LNode *prev,*next;
+		LNode *prev = nullptr,*next = nullptr;
 	};
 	LNode *current,tmp;
 public:

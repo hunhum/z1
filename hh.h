@@ -3,10 +3,10 @@
 #include<cmath>
 #include"num.h"
 #include"matr.h"
-enum ATestStatus{
+enum class ATestStatus{
 	SUCCESS,RP_FAIL,LC_FAIL,SUM_FAIL,SM_FAIL
 };
-enum ATest{
+enum class ATest{
 	ALL,RP,LC,SUM,SM
 };
 
