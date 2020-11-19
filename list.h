@@ -4,6 +4,7 @@ template<typename T>
 class List{
 private:
 	struct LNode{
+		LNode() {}
 		T value;
 		LNode *prev = nullptr,*next = nullptr;
 	};

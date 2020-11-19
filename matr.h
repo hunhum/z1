@@ -4,13 +4,15 @@
 template<typename T>
 class Matrix{
 private:
-	struct CellY{
+	struct CellY {
+		CellY() {}
+		CellY(T val, int j0){ this->value = val; this->j = j0;}
 		T value;
 		int j = 0;
 	};
 	class CellX{
 	private:
-		typename List<Matrix<T>::CellY> *str;
+		typename List<typename Matrix<T>::CellY> *str;
 		int i;
 	public:
 		CellX();
@@ -19,7 +21,7 @@ private:
 		CellX(const CellX&);
 		CellX& operator=(CellX&&);
 		CellX& operator=(const CellX&);
-		typename List<Matrix<T>::CellY>* gstr() const;
+		typename List<typename Matrix<T>::CellY>* gstr() const;
 		int geti() const;
 		void set(int);
 		void nstr();
